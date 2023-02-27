@@ -1,0 +1,19 @@
+pipeline:
+  agent:
+    any:
+  stages:
+    - stage: "Log jenkins Maven Docker Java and Git versions"
+      steps: 
+        - sh "mvn -version"
+        - sh "java -version"
+        - sh "git --version"
+        - sh "docker --version"
+    - stage: "Jenkins YAML Maven Build"
+      steps:
+        - git "https://github.com/Vugam26/deepu.git"
+        - sh "mvn clean compile test install"
+    - stage: "Final Jenkins YAML Pipeline Stage"
+      steps:
+        - sh "echo 'Jenkins YAML Pipeline Complete'"
+
+
